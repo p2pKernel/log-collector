@@ -1,0 +1,2 @@
+# log-collector
+Collect logs
