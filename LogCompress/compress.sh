@@ -50,9 +50,12 @@ if [[ $? -ne 0 ]]; then
 fi
 
 # Step 3 - Zip logs
-zip -rmjq ${ftp_dir}/${dest}.zip ${dest_dir}/${dest}.${ext}
+if [[ -s ${dest_dir}/${dest}.${ext} ]]; then
+    zip -rmjq ${ftp_dir}/${dest}.zip ${dest_dir}/${dest}.${ext}
 
-if [[ $? -ne 0 ]]; then
-    echo "Fail to zip -r ${ftp_dir}/${dest}.zip ${dest_dir}/${dest}.${ext}"
-    exit -3
+    if [[ $? -ne 0 ]]; then
+        echo "Fail to zip -r ${ftp_dir}/${dest}.zip ${dest_dir}/${dest}.${ext}"
+        exit -3
+    fi
 fi
+
