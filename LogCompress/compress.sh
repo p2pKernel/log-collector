@@ -5,6 +5,7 @@ logs_num=$2
 logs_dir=$3
 dest_dir=$4
 ftp_dir=$5
+pre_process = $6
 ext=log
 
 if [[ ! -d ${logs_dir} ]]; then
@@ -39,7 +40,7 @@ cat ${logs[@]} > ${dest_dir}/${dest}.${ext}
 
 if [[ $? -ne 0 ]]; then
     echo "Fail to merge ${logs[@]} to ${dest_dir}/${dest}.${ext}"
-    # exit -2
+    # exit -2    
 fi
 
 # Step 2 - Remove original logs
@@ -49,8 +50,14 @@ if [[ $? -ne 0 ]]; then
     echo "Fail to remove original logs: ${logs[@]}"
 fi
 
-# Step 3 - Zip logs
+# Step 3 - Preprocess and Zip logs
 if [[ -s ${dest_dir}/${dest}.${ext} ]]; then
+    if [[ ${pre_process} && -s ${pre_process} ]]; then
+        source ${pre_process} ${dest_dir}/${dest}.${ext} > ${dest_dir}/${dest}_preprocessed.${ext}
+        if [[ $? -eq 0 ]]; then
+            mv ${dest_dir}/${dest}_preprocessed.${ext} ${dest_dir}/${dest}.${ext}
+        fi
+    fi
     zip -rmjq ${ftp_dir}/${dest}.zip ${dest_dir}/${dest}.${ext}
 
     if [[ $? -ne 0 ]]; then
