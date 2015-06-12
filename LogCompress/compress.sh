@@ -36,12 +36,12 @@ done
 cd ${logs_dir}
 
 # Step 1 - Merge logs
-cat ${logs[@]} > ${dest_dir}/${dest}.${ext}
+cat ${logs[@]} > ${dest_dir}/${dest}.${ext} 2>/dev/null
 
-if [[ $? -ne 0 ]]; then
-    echo "Fail to merge ${logs[@]} to ${dest_dir}/${dest}.${ext}"
-    # exit -2    
-fi
+# if [[ $? -ne 0 ]]; then
+#     echo "Fail to merge ${logs[@]} to ${dest_dir}/${dest}.${ext}"
+#     # exit -2    
+# fi
 
 # Step 2 - Remove original logs
 rm -f ${logs[@]}
