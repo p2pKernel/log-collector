@@ -59,6 +59,7 @@ if [[ -s ${dest_dir}/${dest}.${ext} ]]; then
         fi
     fi
     zip -rmjq ${ftp_dir}/${dest}.zip ${dest_dir}/${dest}.${ext}
+    rm -f ${dest_dir}/${dest}.${ext}
 
     if [[ $? -ne 0 ]]; then
         echo "Fail to zip -r ${ftp_dir}/${dest}.zip ${dest_dir}/${dest}.${ext}"
