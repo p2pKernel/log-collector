@@ -5,7 +5,7 @@ logs_num=$2
 logs_dir=$3
 dest_dir=$4
 ftp_dir=$5
-pre_process = $6
+pre_process=$6
 ext=log
 
 if [[ ! -d ${logs_dir} ]]; then
