@@ -36,7 +36,7 @@ done
 cd ${logs_dir}
 
 # Step 1 - Merge logs
-cat ${logs[@]} > ${dest_dir}/${dest}.${ext} 2>/dev/null
+cat ${logs[@]} > ${dest_dir}/${dest}.${ext} 2 > dev/null
 
 # if [[ $? -ne 0 ]]; then
 #     echo "Fail to merge ${logs[@]} to ${dest_dir}/${dest}.${ext}"
@@ -59,11 +59,12 @@ if [[ -s ${dest_dir}/${dest}.${ext} ]]; then
         fi
     fi
     zip -rmjq ${ftp_dir}/${dest}.zip ${dest_dir}/${dest}.${ext}
-    rm -f ${dest_dir}/${dest}.${ext}
-
     if [[ $? -ne 0 ]]; then
-        echo "Fail to zip -r ${ftp_dir}/${dest}.zip ${dest_dir}/${dest}.${ext}"
-        exit -3
+        echo "Fail to zip -r ${ftp_dir}/${dest}.zip ${dest_dir}/${dest}.${ext}" 
+        # exit -3
     fi
+
 fi
+
+rm -f ${dest_dir}/${dest}.${ext}
 
