@@ -36,7 +36,7 @@ done
 cd ${logs_dir}
 
 # Step 1 - Merge logs
-cat ${logs[@]} > ${dest_dir}/${dest}.${ext} 2 > dev/null
+cat ${logs[@]} > ${dest_dir}/${dest}.${ext} 2 > /dev/null
 
 # if [[ $? -ne 0 ]]; then
 #     echo "Fail to merge ${logs[@]} to ${dest_dir}/${dest}.${ext}"
